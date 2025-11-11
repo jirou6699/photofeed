@@ -1,0 +1,114 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'public/**/*'
+    - 'log/**/*'
+    - 'tmp/**/*'
+    - 'storage/**/*'
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'README.md'
+    - 'Rakefile'
+
+Rails:
+  Enabled: true
+
+Rails/DurationArithmetic:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Exclude:
+    - 'Gemfile'
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: true
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/setup'
+    - 'bin/update'
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/GuardClause:
+  MinBodyLength: 2
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/environments/**/*'
+    - 'test/**/*'
+
+Metrics/MethodLength:
+  Max: 12
+
+Layout/LineLength:
+  AllowHeredoc: true
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/initializers/**/*'
+    - 'lib/tasks/**/*'
+    - 'test/**/*'
+
+Metrics/AbcSize:
+  Max: 20
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/OutputSafety:
+  Exclude:
+    - 'config/application.rb'
+
+Rails/DynamicFindBy:
+  Enabled: false
+
+Lint/SuppressedException:
+  Exclude:
+    - 'test/**/*'
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: true
+  EnforcedStyle: around
+
+Rails/EnumHash:
+  Enabled: false
+
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  EnforcedStyleForEmptyBraces: no_space
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: keyword
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
