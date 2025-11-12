@@ -1,0 +1,50 @@
+<header class="header">
+  <div class="header__container">
+    <nav class="header__navigation">
+      <ul class="header__items">
+        <li class="header__item">
+          <%= link_to "#", class: "header__link" do %>
+            <span>ログアウト</span>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h1 class="h1">ログイン</h1>
+  <%= form_with do |form| %>
+    <div class="form-wrapper">
+      <div class="form-group">
+        <div class="input-group">
+          <%= form.label :email, "メールアドレス", class: "form-label" %>
+          <p class="form-label is-hint">大文字・小文字を区別しません</p>
+          <%= form.text_field :email, class: "form-control", placeholder: "テキスト入力" %>
+        </div>
+        <div class="input-group">
+          <%= form.label :password, "パスワード", class: "form-label" %>
+          <p class="form-label is-hint">6文字以上で入力してください</p>
+          <%= form.password_field :password, class: "form-control", placeholder: "パスワード入力" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <a class="button is-primary">ログイン</a>
+  <a class="button is-secondary">写真アップロード</a>
+
+  <ul class="txt-warning">
+    <li>メールアドレスを入力してください</li>
+    <li>パスワードを入力してください</li>
+  </ul>
+
+  <div class="grid">
+    <div class="card">
+      <h2 class="card-title">test_9</h2>
+      <div class="card-body">
+        <%= image_tag 'child.png', alt: 'photo' %>
+      </div>
+    </div>
+  </div>
+</div>
