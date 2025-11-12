@@ -1,0 +1,26 @@
+:root {
+  --white: #FFFFFF;
+  --black: #000000;
+
+  --gray-50: #F4F4F4;
+  --gray-400: #A7A7A7;
+  --gray-700: #646464;
+
+  --primary: #222222;
+  --secondary: #1e90ff;
+  --warning: #D2115A;
+  --success: #027A56;
+
+  --font-size-5: 2.5rem;
+  --font-size-4: 2rem;
+  --font-size-3: 1.5rem;
+  --font-size-2: 1rem;
+  --font-size-1: .75rem;
+
+  --spacer-4: 2.5rem;
+  --spacer-3: 2rem;
+  --spacer-2: 1rem;
+  --spacer-1: .5rem;
+
+  --container-width: 70rem;
+}
