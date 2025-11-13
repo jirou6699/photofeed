@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   get 'samples' => 'samples#index'
 
-  root 'sessions#new'
-  resources :sessions, only: [ :new, :create ], as: :new_user_session
+  root             to: 'sessions#new'
+  post '/sign_in', to: 'sessions#create'
 end
