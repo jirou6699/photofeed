@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo">
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png", alt: "写真投稿サイトのロゴ" %>
+      <% end %>
+    </div>
+    <nav class="header__navigation">
+      <ul class="header__items">
+        <li class="header__item">
+          <%= link_to "#", class: "header__link" do %>
+            <span>ログアウト</span>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
