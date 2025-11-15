@@ -203,6 +203,25 @@
   }
 }
 
+.notification {
+  padding: var(--spacer-2);
+  font-weight: bold;
+
+  &.is-notice {
+    color: var(--white);
+    background: var(--success);
+  }
+
+  &.is-alert{
+    color: var(--white);
+    background: var(--warning);
+  }
+
+  +* {
+    margin-top: var(--spacer-4);
+  }
+}
+
 /*==========================================================================
   UTILITIES
 ============================================================================*/
