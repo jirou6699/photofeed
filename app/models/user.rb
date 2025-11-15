@@ -8,12 +8,8 @@ class User < ApplicationRecord
     @session_token ||= SecureRandom.urlsafe_base64
   end
 
-  def generate_secure_digest
-    BCrypt::Password.create(session_token, cost: BCrypt::Engine.cost)
-  end
-
   def update_session_digest!
-    update!(session_digest: generate_secure_digest)
+    update!(session_digest: BCrypt::Password.create(session_token))
   end
 
   def authenticated?(token)
