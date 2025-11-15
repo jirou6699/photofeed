@@ -212,7 +212,7 @@
     background: var(--success);
   }
 
-  &.is-alert{
+  &.is-alert {
     color: var(--white);
     background: var(--warning);
   }
