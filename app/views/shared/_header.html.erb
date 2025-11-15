@@ -8,8 +8,10 @@
     <nav class="header__navigation">
       <ul class="header__items">
         <li class="header__item">
-          <%= link_to "#", class: "header__link" do %>
-            <span>ログアウト</span>
+          <% if logged_in? %>
+            <%= link_to "#", class: "header__link" do %>
+              <span>ログアウト</span>
+            <% end %>
           <% end %>
         </li>
       </ul>

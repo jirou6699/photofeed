@@ -245,6 +245,10 @@
   margin-top: var(--spacer-4) !important;
 }
 
+.p-3 {
+  padding: var(--spacer-4) !important;
+}
+
 .m-auto {
   margin: auto !important;
 }

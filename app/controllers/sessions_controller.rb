@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.valid?
       sign_in(user)
       persist_session_for(user)
-      redirect_to root_path, notice: 'Logged in successfully'
+      redirect_to user_photos_path(user.id), notice: 'Logged in successfully'
     else
       render :new
     end
