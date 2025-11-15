@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def session_token
-    @session_token = SecureRandom.urlsafe_base64
+    @session_token ||= SecureRandom.urlsafe_base64
   end
 
   def generate_secure_digest
