@@ -16,10 +16,4 @@ class SessionsController < ApplicationController
     logger.error "Session creation failed: #{e.message}"
     redirect_to root_path, alert: 'Please try again.'
   end
-
-  private
-
-  def session_params
-    params.permit(:email, :password)
-  end
 end
