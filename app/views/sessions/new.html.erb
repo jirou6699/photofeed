@@ -2,16 +2,17 @@
   <div class="mt-3 txt-center">
     <h1 class="h1">ログイン</h1>
   </div>
-  <%= form_with url: '#', method: :post, local: true do |form| %>
+  <%= render "shared/error_messages", object: @user %>
+  <%= form_with url: sign_in_path, method: :post, local: true do |form| %>
     <div class="form-wrapper mt-3">
       <div class="form-group">
         <div class="input-group">
           <%= form.label :email, "メールアドレス", class: "form-label" %>
-          <%= form.email_field :email, class: "form-control", placeholder: "example@email.com", required: true %>
+          <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
         </div>
         <div class="input-group">
           <%= form.label :password, "パスワード", class: "form-label" %>
-          <%= form.password_field :password, class: "form-control", placeholder: "パスワード入力", required: true %>
+          <%= form.password_field :password, class: "form-control", placeholder: "パスワード入力" %>
         </div>
         <div class="txt-center">
           <%= form.submit "ログイン", class: "button is-primary" %>

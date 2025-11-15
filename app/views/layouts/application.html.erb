@@ -26,6 +26,11 @@
 
   <body>
     <%= render 'shared/header' %>
+    <% flash.each do |type, msg| %>
+      <div class="notification is-<%= type %>">
+        <p><%= msg %></p>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
