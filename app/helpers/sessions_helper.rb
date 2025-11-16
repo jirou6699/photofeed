@@ -26,7 +26,6 @@ module SessionsHelper
 
   def current_user
     @current_user ||= find_user_from_cookies
-    # debugger
   end
 end
 
