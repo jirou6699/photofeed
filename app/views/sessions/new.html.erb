@@ -8,7 +8,7 @@
       <div class="form-group">
         <div class="input-group">
           <%= form.label :email, "メールアドレス", class: "form-label" %>
-          <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
+          <%= form.email_field :email, class: "form-control", placeholder: "example@email.com", value: @user.email %>
         </div>
         <div class="input-group">
           <%= form.label :password, "パスワード", class: "form-label" %>
