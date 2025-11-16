@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true
 
-  def find_for_authentication_with(params)
-    self.authenticate_by(email: params[:email], password: params[:password])
+  def self.find_for_authentication_with(params)
+    authenticate_by(email: params[:email], password: params[:password])
   end
 
   def session_token

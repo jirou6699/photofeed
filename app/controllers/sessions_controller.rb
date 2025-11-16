@@ -24,6 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def build_user
-    @user = User.new(email: user_params[:email], password: user_params[:password])
+    @user = User.new(email: user_params[:email], password: user_params[:password]) if user_params.present?
+    @user ||= User.new
   end
 end
