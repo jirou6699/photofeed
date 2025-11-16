@@ -13,6 +13,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def current_user
+    @current_user ||= find_user_from_cookies
+  end
+
   private
 
   def find_user_from_cookies
@@ -22,10 +26,6 @@ module SessionsHelper
       sign_in(user)
       user
     end
-  end
-
-  def current_user
-    @current_user ||= find_user_from_cookies
   end
 end
 
