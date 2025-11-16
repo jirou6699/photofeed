@@ -9,6 +9,14 @@ module SessionsHelper
     cookies.permanent[:session_token] = user.session_token
   end
 
+  def logged_in?
+    !current_user.nil?
+  end
+
+  def current_user
+    @current_user ||= find_user_from_cookies
+  end
+
   private
 
   def find_user_from_cookies
@@ -20,4 +28,3 @@ module SessionsHelper
     end
   end
 end
-
