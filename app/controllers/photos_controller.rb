@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
   before_action :require_login, only: [ :index, :new, :create ]
 
   def index
-    @photos = Photo.where(user_id: current_user.id).with_attached_image.order(created_at: :desc)
+    @photos = Photo.where(user_id: current_user.id).with_attached_thumbnail.order(created_at: :desc)
   end
 
   def new
@@ -25,6 +25,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:title, :image)
+    params.require(:photo).permit(:title, :thumbnail)
   end
 end
