@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to photos_path, notice: '写真をアップロードしました'
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   rescue StandardError => e
     logger.error "Photo creation failed: #{e.message}"
