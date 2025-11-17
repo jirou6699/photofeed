@@ -18,6 +18,15 @@ class SessionsController < ApplicationController
     redirect_to root_path, alert: 'Please try again.'
   end
 
+  def destroy
+    return if !logged_in?
+    sign_out
+    redirect_to root_path, notice: 'Logged out successfully'
+  rescue StandardError => e
+    logger.error "Session destruction failed: #{e.message}"
+    redirect_to root_path, alert: 'Please try again.'
+  end
+
   private
 
   def user_params
