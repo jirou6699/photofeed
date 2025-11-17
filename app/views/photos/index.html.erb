@@ -4,15 +4,18 @@
     <h1 class="h1">写真一覧</h1>
   </div>
   <div class="txt-center mt-3">
-    <%= link_to '新しい写真を追加', '#', class: 'button is-primary' %>
+    <%= link_to '新しい写真を追加', new_photo_path, class: 'button is-primary' %>
   </div>
-  <div class="grid mt-3 p-3 bg-gray-50">
-    <%# TODO: ループ処理に変更・一枚も写真がない場合は非表示%>
-    <div class="card">
-      <h2 class="card-title">test_1</h2>
-      <div class="card-body">
-        <%= image_tag 'child.png', alt: 'photo' %>
+    <% if @photos.present? %>
+      <div class="grid mt-3 p-3 bg-gray-50">
+        <% @photos.each do |photo| %>
+          <div class="card">
+            <h2 class="card-title"><%= photo.title %></h2>
+            <div class="card-body">
+              <%= image_tag photo.image.variant(resize_to_fill: [300, 300]), alt: 'photo' %>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
-  </div>
+    <% end %>
 </div>
