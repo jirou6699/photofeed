@@ -6,6 +6,9 @@
   <div class="txt-center mt-3">
     <%= link_to '新しい写真を追加', new_photo_path, class: 'button is-primary' %>
   </div>
+  <div class="txt-center mt-3">
+    <%= link_to 'MyTweetAppと連携', oauth_authorize_url, class: 'button is-secondary' %>
+  </div>
     <% if @photos.present? %>
       <div class="grid mt-3 p-3 bg-gray-50">
         <% @photos.each do |photo| %>

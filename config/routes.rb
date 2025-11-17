@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   get 'samples' => 'samples#index'
 
-  root                to: 'sessions#new'
-  post '/sign_in',    to: 'sessions#create'
-  delete '/sign_out', to: 'sessions#destroy'
+  root                      to: 'sessions#new'
+  post   '/sign_in',        to: 'sessions#create'
+  delete '/sign_out',       to: 'sessions#destroy'
+  get    '/oauth/callback', to: 'oauth#callback'
   scope :users do
     resources :photos, only: [ :index, :new, :create ]
   end
