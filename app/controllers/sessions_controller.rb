@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       persist_session_for(user)
       redirect_to photos_path, notice: 'Logged in successfully'
     else
+      @user.errors.add(:base, 'emailかパスワードが正しくありません')
       render :new
     end
   rescue StandardError => e
@@ -24,7 +25,7 @@ class SessionsController < ApplicationController
   end
 
   def build_user
-    @user = User.new(email: user_params[:email], password: user_params[:password]) if user_params.present?
+    @user = User.new(user_params) if user_params.present?
     @user ||= User.new
   end
 end
