@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :require_login, only: [ :index, :new ]
+  before_action :require_login, only: [ :index, :new, :create ]
 
   def index
     @photos = Photo.where(user_id: current_user.id).with_attached_image.order(created_at: :desc)
