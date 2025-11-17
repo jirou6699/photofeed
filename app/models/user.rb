@@ -7,7 +7,11 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   def self.find_for_authentication_with(params)
-    authenticate_by(email: params[:email], password: params[:password])
+    authenticate_by(email: normalize_email(params), password: params[:password])
+  end
+
+  def self.normalize_email(params)
+    params[:email]&.downcase
   end
 
   def session_token
