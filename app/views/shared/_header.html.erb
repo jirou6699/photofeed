@@ -9,7 +9,7 @@
       <ul class="header__items">
         <li class="header__item">
           <% if logged_in? %>
-            <%= link_to "#", class: "header__link" do %>
+            <%= link_to sign_out_path, data: { turbo_method: :delete }, class: "header__link" do %>
               <span>ログアウト</span>
             <% end %>
           <% end %>

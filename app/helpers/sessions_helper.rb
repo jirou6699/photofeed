@@ -9,12 +9,24 @@ module SessionsHelper
     cookies.permanent[:session_token] = user.session_token
   end
 
+  def remove_persistent_session(user)
+    user.delete_session_digest!
+    cookies.delete(:user_id)
+    cookies.delete(:session_token)
+  end
+
   def logged_in?
     !current_user.nil?
   end
 
   def current_user
     @current_user ||= find_user_from_cookies
+  end
+
+  def sign_out
+    remove_persistent_session(current_user) if logged_in?
+    session.delete(:user_id)
+    @current_user = nil
   end
 
   private

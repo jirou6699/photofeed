@@ -25,4 +25,8 @@ class User < ApplicationRecord
   def authenticated?(token)
     BCrypt::Password.new(session_digest).is_password?(token)
   end
+
+  def delete_session_digest!
+    update!(session_digest: nil)
+  end
 end
