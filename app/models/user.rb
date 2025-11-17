@@ -2,6 +2,8 @@ class User < ApplicationRecord
   attr_accessor :session_token
   has_secure_password
 
+  has_many :photos, dependent: :destroy
+
   validates :email, presence: true
 
   def self.find_for_authentication_with(params)
