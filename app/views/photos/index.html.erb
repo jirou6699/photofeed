@@ -12,7 +12,9 @@
           <div class="card">
             <h2 class="card-title"><%= photo.title %></h2>
             <div class="card-body">
-              <%= image_tag photo.image.variant(resize_to_fill: [300, 300]), alt: 'photo' %>
+              <% if photo.image.attached? %>
+                <%= image_tag photo.image.variant(resize_to_fill: [300, 300]), alt: 'photo' %>
+              <% end %>
             </div>
           </div>
         <% end %>
