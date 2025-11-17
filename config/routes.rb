@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   root             to: 'sessions#new'
   post '/sign_in', to: 'sessions#create'
   scope :users do
-    resources :photos, only: [ :index ]
+    resources :photos, only: [ :index, :new, :create ]
   end
 end
