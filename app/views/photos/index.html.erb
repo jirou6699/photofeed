@@ -19,6 +19,11 @@
                 <%= image_tag photo.thumbnail.variant(resize_to_fill: [300, 300]), alt: 'photo' %>
               <% end %>
             </div>
+            <% if session[:oauth_access_token].present? %>
+              <div class="mt-1">
+                <%= button_to 'ツイートする', tweet_photo_path(photo), method: :post, class: 'button is-primary' %>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>

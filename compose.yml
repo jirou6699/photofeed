@@ -34,6 +34,7 @@ services:
       OAUTH_CLIENT_SECRET: ${OAUTH_CLIENT_SECRET}
       OAUTH_GRANT_TYPE: ${OAUTH_GRANT_TYPE}
       OAUTH_TOKEN_URL: ${OAUTH_TOKEN_URL}
+      TWEET_API_URL: ${TWEET_API_URL}
     stdin_open: true
     tty: true
 
