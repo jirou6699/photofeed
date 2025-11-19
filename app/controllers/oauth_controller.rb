@@ -24,19 +24,17 @@ class OauthController < ApplicationController
   end
 
   def request_access_token
-    config = Rails.application.config.x.oauth
-    uri = URI.parse(config.token_url)
+    uri = URI.parse(ENV['OAUTH_TOKEN_URL'])
     Net::HTTP.post_form(uri, build_token_params)
   end
 
   def build_token_params
-    config = Rails.application.config.x.oauth
     {
-      grant_type:    config.grant_type,
+      grant_type:    ENV['OAUTH_GRANT_TYPE'],
       code:          params[:code],
-      redirect_uri:  config.redirect_uri,
-      client_id:     config.client_id,
-      client_secret: config.client_secret
+      redirect_uri:  ENV['OAUTH_REDIRECT_URI'],
+      client_id:     ENV['OAUTH_CLIENT_ID'],
+      client_secret: ENV['OAUTH_CLIENT_SECRET']
     }
   end
 
