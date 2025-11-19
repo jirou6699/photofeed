@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   delete '/sign_out',       to: 'sessions#destroy'
   get    '/oauth/callback', to: 'oauth#callback'
   scope :users do
-    resources :photos, only: [ :index, :new, :create ]
+    resources :photos, only: [ :index, :new, :create ] do
+      post 'tweet', on: :member
+    end
   end
 end
