@@ -1,12 +1,57 @@
+require 'net/http'
+
 class OauthController < ApplicationController
   def callback
-    # Todo: エンドポイントからのレスポンスは後から変更
-    if params[:error].present?
-      Rails.logger.error "OAuth error: #{params[:error]}"
-      redirect_to root_path, alert: "連携に失敗しました (error: #{params[:error]})"
-    elsif params[:code].present?
-      Rails.logger.info "OAuth success: #{params[:code]}"
-      redirect_to photos_path, notice: "連携に成功しました"
+    return handle_authorization_failure(params[:error]) if params[:code].blank?
+    response = request_access_token
+    if response.is_a?(Net::HTTPSuccess)
+      handle_authorization_success(response)
+    else
+      handle_authorization_failure(response.body)
     end
+  end
+
+  private
+
+  def handle_authorization_success(response)
+    store_access_token(response)
+    redirect_to photos_path, notice: "連携が完了しました"
+  rescue StandardError => e
+    handle_authorization_failure("Token storage failed: #{e.message}")
+  end
+
+  def handle_authorization_failure(message)
+    Rails.logger.error message
+    redirect_to photos_path, notice: "再度連携をお願いします"
+  end
+
+  def request_access_token
+    config = Rails.application.config.x.oauth
+    uri = URI.parse(config.token_url)
+    Net::HTTP.post_form(uri, build_token_params)
+  end
+
+  def build_token_params
+    config = Rails.application.config.x.oauth
+    {
+      grant_type:    config.grant_type,
+      code:          params[:code],
+      redirect_uri:  config.redirect_uri,
+      client_id:     config.client_id,
+      client_secret: config.client_secret
+    }
+  end
+
+  def store_access_token(response)
+    access_token = JSON.parse(response.body)["access_token"]
+
+    if access_token.blank?
+      raise "Access token not found in response"
+    end
+
+    session[:oauth_access_token] = access_token
+  rescue JSON::ParserError => e
+    Rails.logger.error "Failed to parse token response: #{e.message}"
+    raise
   end
 end
