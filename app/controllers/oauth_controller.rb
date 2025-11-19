@@ -2,27 +2,25 @@ require 'net/http'
 
 class OauthController < ApplicationController
   def callback
-    return handle_authorization_failure(params[:error]) if params[:code].blank?
+    return handle_authorization_failure if params[:code].blank?
+
     response = request_access_token
     if response.is_a?(Net::HTTPSuccess)
-      handle_authorization_success(response)
+      store_access_token(response)
+      redirect_to photos_path, notice: "連携が完了しました"
     else
       handle_authorization_failure(response.body)
     end
+  rescue StandardError => e
+    Rails.logger.error "OAuth error: #{e.class} - #{e.message}"
+    handle_authorization_failure
   end
 
   private
 
-  def handle_authorization_success(response)
-    store_access_token(response)
-    redirect_to photos_path, notice: "連携が完了しました"
-  rescue StandardError => e
-    handle_authorization_failure("Token storage failed: #{e.message}")
-  end
-
-  def handle_authorization_failure(message)
-    Rails.logger.error message
-    redirect_to photos_path, notice: "再度連携をお願いします"
+  def handle_authorization_failure(message = nil)
+    Rails.logger.error "Rails logger error: #{message}" if message.present?
+    redirect_to photos_path, alert: "再度連携をお願いします"
   end
 
   def request_access_token
@@ -44,14 +42,7 @@ class OauthController < ApplicationController
 
   def store_access_token(response)
     access_token = JSON.parse(response.body)["access_token"]
-
-    if access_token.blank?
-      raise "Access token not found in response"
-    end
-
+    raise "Access token not found in response" if access_token.blank?
     session[:oauth_access_token] = access_token
-  rescue JSON::ParserError => e
-    Rails.logger.error "Failed to parse token response: #{e.message}"
-    raise
   end
 end
