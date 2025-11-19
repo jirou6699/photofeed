@@ -21,7 +21,7 @@
             </div>
             <% if session[:oauth_access_token].present? %>
               <div class="mt-1">
-                <%= button_to 'ツイートする', tweet_photo_path(photo, ), method: :post, class: 'button is-primary' %>
+                <%= button_to 'ツイートする', tweet_photo_path(photo), method: :post, class: 'button is-primary' %>
               </div>
             <% end %>
           </div>
