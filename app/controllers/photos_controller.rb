@@ -27,9 +27,10 @@ class PhotosController < ApplicationController
     title = photo.title
     image_url = url_for(photo.thumbnail)
     access_token = session[:oauth_access_token]
+    uri = URI(ENV['TWEET_API_URL'])
 
-    request = build_tweet_request(title, image_url, access_token)
-    response = post_tweet(request)
+    request = build_tweet_request(uri, title, image_url, access_token)
+    response = post_tweet(uri, request)
 
     if response.code.to_i == 201
       redirect_to photos_path, notice: 'ツイートを作成しました。'
@@ -47,8 +48,7 @@ class PhotosController < ApplicationController
     params.require(:photo).permit(:title, :thumbnail)
   end
 
-  def build_tweet_request(title, image_url, access_token)
-    uri = URI(ENV['TWEET_API_URL'])
+  def build_tweet_request(uri, title, image_url, access_token)
     request = Net::HTTP::Post.new(uri.path, {
       'Content-Type'  => 'application/json',
       'Authorization' => "Bearer #{access_token}"
@@ -62,8 +62,7 @@ class PhotosController < ApplicationController
     request
   end
 
-  def post_tweet(request)
-    uri = URI(ENV['TWEET_API_URL'])
+  def post_tweet(uri, request)
     http = Net::HTTP.new(uri.host, uri.port)
     http.request(request)
   end
