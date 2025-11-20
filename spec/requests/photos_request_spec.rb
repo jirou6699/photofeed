@@ -4,6 +4,9 @@ RSpec.describe PhotosController, type: :request do
   describe "GET /index" do
     let(:user) { create(:user) }
     let(:other_user) { create(:user, email: "other@example.com") }
+    let!(:photo1) { create(:photo, user: user, title: "Old Photo", created_at: 2.days.ago) }
+    let!(:photo2) { create(:photo, user: user, title: "New Photo", created_at: 1.day.ago) }
+    let!(:other_photo) { create(:photo, user: other_user, title: "Other Photo") }
 
     context "ログインしている場合" do
       before do
@@ -16,20 +19,13 @@ RSpec.describe PhotosController, type: :request do
       end
 
       it "ユーザーの写真一覧が表示されること" do
-        photo1 = create(:photo, user: user, title: "Photo 1")
-        photo2 = create(:photo, user: user, title: "Photo 2")
-        other_photo = create(:photo, user: other_user, title: "Other Photo")
-
         get photos_path
-        expect(response.body).to include("Photo 1")
-        expect(response.body).to include("Photo 2")
+        expect(response.body).to include("Old Photo")
+        expect(response.body).to include("New Photo")
         expect(response.body).not_to include("Other Photo")
       end
 
       it "写真が作成日時の降順で表示されること" do
-        photo1 = create(:photo, user: user, title: "Old Photo", created_at: 2.days.ago)
-        photo2 = create(:photo, user: user, title: "New Photo", created_at: 1.day.ago)
-
         get photos_path
         expect(response.body.index("New Photo")).to be < response.body.index("Old Photo")
       end
