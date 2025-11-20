@@ -12,3 +12,4 @@ module OauthHelper
     uri.to_s
   end
 end
+
