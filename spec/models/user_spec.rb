@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  describe "find_for_authentication_with" do
+  describe "#find_for_authentication_with" do
     let(:password) { "password" }
     let!(:user) { create(:user) }
 
@@ -54,7 +54,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "normalize_email" do
+  describe "#normalize_email" do
     it "emailを小文字に変換すること" do
       params = { email: "USER@EXAMPLE.COM" }
       normalized_email = User.normalize_email(params)
@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "session_token" do
+  describe "#session_token" do
     let(:user) { create(:user) }
 
     context "session_tokenが存在しない場合" do
@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "update_session_digest!" do
+  describe "#update_session_digest!" do
     let(:user) { create(:user) }
 
     it "update!処理が完了すること" do
@@ -91,7 +91,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "authenticated?" do
+  describe "#authenticated?" do
     let(:user) { create(:user) }
     let(:token) { "test_token" }
 
@@ -112,7 +112,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "delete_session_digest!" do
+  describe "#delete_session_digest!" do
     let(:user) { create(:user) }
 
     it "update!でsession_digestカラムが空になること" do
