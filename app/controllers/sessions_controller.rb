@@ -8,23 +8,23 @@ class SessionsController < ApplicationController
     if user = User.find_for_authentication_with(user_params)
       sign_in(user)
       persist_session_for(user)
-      redirect_to photos_path, notice: 'Logged in successfully'
+      redirect_to photos_path, notice: t('flash.sessions.login_success')
     else
-      @user.errors.add(:base, 'emailかパスワードが正しくありません')
+      @user.errors.add(:base, t('flash.sessions.login_failed'))
       render :new
     end
   rescue StandardError => e
     logger.error "Session creation failed: #{e.message}"
-    redirect_to root_path, alert: 'Please try again.'
+    redirect_to root_path, alert: t('flash.sessions.error')
   end
 
   def destroy
     return if !logged_in?
     sign_out
-    redirect_to root_path, notice: 'Logged out successfully'
+    redirect_to root_path, notice: t('flash.sessions.logout_success')
   rescue StandardError => e
     logger.error "Session destruction failed: #{e.message}"
-    redirect_to root_path, alert: 'Please try again.'
+    redirect_to root_path, alert: t('flash.sessions.error')
   end
 
   private

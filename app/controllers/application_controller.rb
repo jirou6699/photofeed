@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
 
   def require_login
     return if logged_in?
-    redirect_to root_path, alert: 'Please log in to access this page'
+    redirect_to root_path, alert: t('flash.auth.require_login')
   end
 end

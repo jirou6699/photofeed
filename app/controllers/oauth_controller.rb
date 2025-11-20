@@ -7,7 +7,7 @@ class OauthController < ApplicationController
     response = request_access_token
     if response.is_a?(Net::HTTPSuccess)
       store_access_token(response)
-      redirect_to photos_path, notice: '連携が完了しました'
+      redirect_to photos_path, notice: t('flash.oauth.connection_success')
     else
       handle_authorization_failure(response.body)
     end
@@ -20,7 +20,7 @@ class OauthController < ApplicationController
 
   def handle_authorization_failure(message = nil)
     Rails.logger.error "Rails logger error: #{message}" if message.present?
-    redirect_to photos_path, alert: '再度連携をお願いします'
+    redirect_to photos_path, alert: t('flash.oauth.connection_error')
   end
 
   def request_access_token
