@@ -12,13 +12,13 @@ class PhotosController < ApplicationController
   def create
     @photo = current_user.photos.new(photo_params)
     if @photo.save
-      redirect_to photos_path, notice: '写真をアップロードしました'
+      redirect_to photos_path, notice: t('flash.photos.upload_success')
     else
       render :new
     end
   rescue StandardError => e
     logger.error "Photo creation failed: #{e.message}"
-    flash[:alert] = 'please try again'
+    flash[:alert] = t('flash.photos.upload_error')
     render :new
   end
 
@@ -33,13 +33,13 @@ class PhotosController < ApplicationController
     response = post_tweet(uri, request)
 
     if response.code.to_i == 201
-      redirect_to photos_path, notice: 'ツイートを作成しました。'
+      redirect_to photos_path, notice: t('flash.photos.tweet_success')
     else
-      redirect_to photos_path, alert: '再度ツイートの作成をお願いします。'
+      redirect_to photos_path, alert: t('flash.photos.tweet_error')
     end
   rescue StandardError => e
     logger.error "Tweet creation failed: #{e.message}"
-    redirect_to photos_path, alert: 'ツイートの作成中にエラーが発生しました。'
+    redirect_to photos_path, alert: t('flash.photos.tweet_exception')
   end
 
   private
