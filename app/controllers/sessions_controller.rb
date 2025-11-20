@@ -21,7 +21,6 @@ class SessionsController < ApplicationController
   def destroy
     return if !logged_in?
     sign_out
-    reset_session
     redirect_to root_path, notice: 'Logged out successfully'
   rescue StandardError => e
     logger.error "Session destruction failed: #{e.message}"
