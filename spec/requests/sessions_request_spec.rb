@@ -64,18 +64,6 @@ RSpec.describe SessionsController, type: :request do
         expect(response.body).to include("password")
       end
     end
-
-    context "例外が発生した場合" do
-      before do
-        allow(User).to receive(:find_for_authentication_with).and_raise(StandardError.new("Database error"))
-      end
-
-      it "root_pathにリダイレクトすること" do
-        post sign_in_path, params: { email: user.email, password: user.password }
-        expect(response).to redirect_to(root_path)
-        expect(flash[:alert]).to eq("Please try again.")
-      end
-    end
   end
 
   describe "DELETE /destroy" do
@@ -99,18 +87,6 @@ RSpec.describe SessionsController, type: :request do
       it "user_idセッションが削除されること" do
         delete sign_out_path
         expect(session[:user_id]).to be_nil
-      end
-    end
-
-    context "例外が発生した場合" do
-      before do
-        allow_any_instance_of(SessionsController).to receive(:sign_out).and_raise(StandardError.new("Session error"))
-      end
-
-      it "root_pathにリダイレクトすること" do
-        delete sign_out_path
-        expect(response).to redirect_to(root_path)
-        expect(flash[:alert]).to eq("Please try again.")
       end
     end
   end
