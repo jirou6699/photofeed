@@ -25,7 +25,7 @@ RSpec.describe SessionsController, type: :request do
 
       it "成功メッセージが表示されること" do
         post sign_in_path, params: { email: user.email, password: user.password }
-        expect(flash[:notice]).to eq("Logged in successfully")
+        expect(flash[:notice]).to eq("ログインしました")
       end
 
       it "セッションが作成されること" do
@@ -81,7 +81,7 @@ RSpec.describe SessionsController, type: :request do
 
       it "成功メッセージが表示されること" do
         delete sign_out_path
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(flash[:notice]).to eq("ログアウトしました")
       end
 
       it "user_idセッションが削除されること" do
