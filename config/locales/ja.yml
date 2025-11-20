@@ -2,13 +2,14 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
+      photo: "写真"
     attributes:
       user:
         email: "メールアドレス"
         password: "パスワード"
       photo:
         title: "タイトル"
-        image: "画像ファイル"
+        thumbnail: "画像ファイル"
   errors:
     messages:
       blank: "を入力してください"
