@@ -3,7 +3,6 @@ require 'net/http'
 class OauthController < ApplicationController
   def callback
     return handle_authorization_failure if params[:code].blank?
-
     response = request_access_token
     if response.is_a?(Net::HTTPSuccess)
       store_access_token(response)
