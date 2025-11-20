@@ -7,7 +7,7 @@ RSpec.describe OauthController, type: :request do
     let(:success_response_body) { { access_token: access_token }.to_json }
 
     context "認証コードが存在し、トークン取得に成功した場合" do
-      let(:success_response) { double("response", is_a?: true, body: success_response_body) }
+      let(:success_response) { double("response", body: success_response_body) }
 
       before do
         allow(Net::HTTP).to receive(:post_form).and_return(success_response)
@@ -43,7 +43,7 @@ RSpec.describe OauthController, type: :request do
     end
 
     context "トークン取得に失敗した場合" do
-      let(:failure_response) { double("response", is_a?: false, body: "Bad Request") }
+      let(:failure_response) { double("response", body: "Bad Request") }
 
       before do
         allow(Net::HTTP).to receive(:post_form).and_return(failure_response)
@@ -62,7 +62,7 @@ RSpec.describe OauthController, type: :request do
     end
 
     context "アクセストークンがレスポンスに含まれていない場合" do
-      let(:empty_response) { double("response", is_a?: true, body: {}.to_json) }
+      let(:empty_response) { double("response", body: {}.to_json) }
 
       before do
         allow(Net::HTTP).to receive(:post_form).and_return(empty_response)
