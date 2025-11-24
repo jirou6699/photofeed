@@ -13,18 +13,11 @@ class SessionsController < ApplicationController
       @user.errors.add(:base, t('flash.sessions.login_failed'))
       render :new
     end
-  rescue StandardError => e
-    logger.error "Session creation failed: #{e.message}"
-    redirect_to root_path, alert: t('flash.sessions.error')
   end
 
   def destroy
-    return if !logged_in?
     sign_out
     redirect_to root_path, notice: t('flash.sessions.logout_success')
-  rescue StandardError => e
-    logger.error "Session destruction failed: #{e.message}"
-    redirect_to root_path, alert: t('flash.sessions.error')
   end
 
   private
