@@ -14,12 +14,9 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to photos_path, notice: t('flash.photos.upload_success')
     else
+      flash.now[:alert] = t('flash.photos.upload_error')
       render :new
     end
-  rescue StandardError => e
-    logger.error "Photo creation failed: #{e.message}"
-    flash[:alert] = t('flash.photos.upload_error')
-    render :new
   end
 
   def tweet
